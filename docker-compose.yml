@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+### Node.js Container ####################################
+  node:
+    build: ./node
+    ports:
+      - "8088:80"
+    links:
+      - redis
+    restart: always
+
+### Redis Container ####################################
+  redis:
+    image: redis:3.0
+    restart: always
+
+### Mongodb Container ####################################
+  mongo:
+    image: 'mongo:3.4.1'
+    ports:
+      - '27017:27017'
+    volumes:
+      - /data/db
+      - /data/configdb
